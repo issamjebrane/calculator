@@ -1,20 +1,42 @@
-import express from 'express'
-import calculator  from './src/calculate.js'
-const app = express()
+const add = (a,b)=>{
+    return a + b 
+}
 
-app.get('/',(req,res)=>{
-    res.send('hello')
-})
+ const subtract = (a,b)=>{
+    return a-b
+}
 
-app.get('/:operator/:num1/:num2',(req,res)=>{
-    var operator = req.params.operator
-    var num1 = parseInt(req.params.num1)
-    var num2 = parseInt(req.params.num2)
-    var result = calculator(num1,num2,operator)
-    res.json(result)
-})
+ const divide = (a,b)=>{
+   return b == 0 ?  'divisor must not equal 0' : a/b
+}
 
+ const multiply = (a,b)=>{
+    return a*b
+}
 
-app.listen('3000',()=>{
-    console.log('listening on port 3000')
-})
+const calculatrice =(num1,num2,operator)=>{
+var result
+switch(operator){
+    case "addition":
+    result = add(num1, num2);
+    break;
+
+    case "subtraction":
+    result = subtract(num1, num2);
+    break;
+
+    case "multiplication":
+    result = multiply(num1, num2);
+    break;
+
+    case "division":
+    result = divide(num1, num2);
+    break;
+
+    default:
+    result = "Sorry, please enter a valid operator!"
+}
+    return result
+}
+
+module.exports = calculatrice
